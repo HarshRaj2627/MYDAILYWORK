@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Quiz Results</h2>
+        <p id="scoreDisplay"></p>
+        <button onclick="location.href='index.html'">Go to Home</button>
+    </div>
+
+    <script>
+        // Get the score from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const score = urlParams.get('score');
+        const quizIndex = urlParams.get('quiz');
+
+        // Display the score
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        if (score !== null) {
+            const quizzes = JSON.parse(localStorage.getItem('quizzes')) || [];
+            const quiz = quizzes[quizIndex];
+            const totalQuestions = quiz.questions.length;
+
+            scoreDisplay.innerText = `You scored ${score} out of ${totalQuestions}!`;
+        } else {
+            scoreDisplay.innerText = 'Score not available.';
+        }
+    </script>
+</body>
+</html>

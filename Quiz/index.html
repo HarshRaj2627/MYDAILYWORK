@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Quiz Maker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="welcomeMessage"></h1>
+        <div id="authActions"></div>
+    </div>
+
+    <script>
+        const currentUser = localStorage.getItem('currentUser');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const authActions = document.getElementById('authActions');
+
+        if (currentUser) {
+            welcomeMessage.innerText = `Welcome, ${currentUser}!`;
+            authActions.innerHTML = `
+                <button onclick="location.href='quizCreation.html'">Create a Quiz</button>
+                <button onclick="location.href='list.html'">Take a Quiz</button>
+                <button onclick="logout()">Logout</button>
+            `;
+        } else {
+            welcomeMessage.innerText = 'Welcome to the Online Quiz Maker';
+            authActions.innerHTML = `
+                <button onclick="location.href='login.html'">Login</button>
+                <button onclick="location.href='register.html'">Register</button>
+            `;
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
